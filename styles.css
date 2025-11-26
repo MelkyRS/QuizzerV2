@@ -6,7 +6,7 @@
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
-/* BODY GLOBAL UNTUK HALAMAN BIASA (.page) */
+/* BODY GLOBAL UNTUK HALAMAN DENGAN .page */
 body {
   background: #fdf2ff;
   color: #0f172a;
@@ -77,6 +77,7 @@ body {
   flex: 1;
 }
 
+/* HERO & CARD */
 .hero {
   background: white;
   padding: 16px;
@@ -95,6 +96,7 @@ body {
   margin-bottom: 14px;
 }
 
+/* GRID FORM */
 .grid-2 {
   display: grid;
   gap: 10px;
@@ -104,21 +106,33 @@ body {
   .grid-2 { grid-template-columns: 1fr 1fr; }
 }
 
-label { font-size: 12px; font-weight: bold; }
+label {
+  font-size: 12px;
+  font-weight: bold;
+}
 
-select, input {
+select,
+input[type="text"],
+input[type="password"],
+input[type="file"] {
   width: 100%;
   padding: 8px;
   border-radius: 10px;
   border: 1px solid #e5e7eb;
 }
 
+/* BUTTONS */
 .btn {
   padding: 10px 14px;
   border-radius: 999px;
   border: none;
   cursor: pointer;
   font-size: 13px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
 .btn.primary {
@@ -129,9 +143,30 @@ select, input {
 .btn.ghost {
   background: white;
   border: 1px solid #e5e7eb;
+  color: #0f172a;
 }
 
-/* QUIZ */
+.btn.danger {
+  background: #fee2e2;
+  border: 1px solid #ef4444;
+  color: #b91c1c;
+}
+
+/* BARIS TOMBOL */
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* TEKS KECIL */
+.small {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* QUIZ AREA */
 .question {
   font-size: 16px;
   font-weight: bold;
@@ -152,6 +187,7 @@ select, input {
   cursor: pointer;
 }
 
+/* PROGRESS BAR */
 .progress {
   background: #e5e7eb;
   height: 8px;
@@ -166,29 +202,7 @@ select, input {
   width: 0%;
 }
 
-/* FOOTER */
-.site-footer {
-  font-size: 11px;
-  color: #6b7280;
-  text-align: center;
-  margin-top: 10px;
-}
-
-/* KECIL & LAYOUT BANTUAN */
-.small {
-  font-size: 12px;
-  color: #6b7280;
-}
-
-/* ====== UPDATE UNTUK MODE SURVIVAL & QUIZ ====== */
-
-.btn-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
-}
-
+/* HEADER DI DALAM QUIZ (META + SKOR + TIMER) */
 .quiz-header {
   display: flex;
   justify-content: space-between;
@@ -206,12 +220,14 @@ select, input {
   font-weight: bold;
 }
 
+/* TIMER UNTUK SURVIVAL */
 .timer {
   margin-top: 2px;
   font-weight: 700;
   color: #b91c1c;
 }
 
+/* BOX PENJELASAN */
 .explain {
   margin-top: 10px;
   padding: 10px;
@@ -220,11 +236,15 @@ select, input {
   border: 1px solid #e5e7eb;
 }
 
-/* UTILITY */
-.hidden {
-  display: none;
+/* FOOTER */
+.site-footer {
+  font-size: 11px;
+  color: #6b7280;
+  text-align: center;
+  margin-top: 10px;
 }
 
+/* CODE STYLE (untuk text kecil <code>) */
 .code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New",
     monospace;
@@ -233,4 +253,9 @@ select, input {
   border-radius: 6px;
   background: #f9fafb;
   border: 1px solid #e5e7eb;
+}
+
+/* UTILITY */
+.hidden {
+  display: none;
 }
