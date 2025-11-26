@@ -11,7 +11,10 @@
   <header class="site-header">
     <div class="header-left">
       <div class="logo-bubble">Q</div>
-      <div><b>Quiz Mode</b></div>
+      <div>
+        <div><b>Quiz Kreativitas</b></div>
+        <div style="font-size:11px;color:#6b7280;">Mode Siswa – Mengerjakan soal</div>
+      </div>
     </div>
     <nav class="header-nav">
       <a href="index.html">Home</a>
@@ -26,7 +29,8 @@
     <section class="card" id="home">
       <h2>Pilih Kuis</h2>
       <p class="small" style="margin-top:4px;">
-        Pilih mata pelajaran dan level kesulitan, lalu klik <b>Mulai Quiz</b>.
+        Pilih mata pelajaran dan level kesulitan, atau gunakan <b>Mode Survival</b>
+        untuk menjawab 50 soal campuran dari semua mata pelajaran.
       </p>
 
       <div class="grid-2" style="margin-top:10px;">
@@ -45,19 +49,29 @@
       </div>
 
       <div class="btn-row" style="margin-top:10px;">
-        <button id="btn-start" class="btn primary">Mulai Quiz</button>
+        <button id="btn-start" class="btn primary">Mulai Quiz Biasa</button>
         <button id="btn-random" class="btn ghost">Acak Mapel</button>
       </div>
 
-      <p class="small" style="margin-top:8px;">
-        💡 Saat kamu mengulang level yang sama, soal akan diacak dan dimulai dari nomor yang berbeda.
+      <hr style="margin:14px 0;border:none;border-top:1px solid #e5e7eb;">
+
+      <h3 style="font-size:15px;margin-bottom:6px;">🛡️ Mode Survival</h3>
+      <p class="small">
+        Jawab <b>50 soal acak</b> dari semua mata pelajaran dan level.
+        Setiap soal punya batas waktu <b>1 menit</b>. Cocok untuk latihan intensif!
       </p>
+      <div class="btn-row" style="margin-top:8px;">
+        <button id="btn-survival" class="btn primary">Mulai Mode Survival</button>
+      </div>
     </section>
 
     <!-- QUIZ BERJALAN -->
     <section id="quiz" class="card hidden">
       <div class="quiz-header">
-        <div class="quiz-meta" id="meta"></div>
+        <div>
+          <div class="quiz-meta" id="meta"></div>
+          <div class="quiz-meta timer" id="timer"></div>
+        </div>
         <div class="quiz-score">
           Skor: <span id="score">0</span>
         </div>
@@ -78,7 +92,7 @@
 
         <div class="btn-row" style="margin-top:8px;">
           <button id="btn-next" class="btn primary">Soal Berikutnya</button>
-          <button id="btn-retry" class="btn danger hidden">Ulangi Level</button>
+          <button id="btn-retry" class="btn danger hidden">Ulangi Level / Survival</button>
           <button id="btn-home" class="btn ghost">Kembali ke Pilihan Kuis</button>
         </div>
       </div>
@@ -89,7 +103,7 @@
       <h2>Hasil Quiz</h2>
       <p id="resultText" class="small" style="margin-top:6px;"></p>
       <div class="btn-row center" style="margin-top:10px;">
-        <button id="btn-res-retry" class="btn primary">Ulangi Level</button>
+        <button id="btn-res-retry" class="btn primary">Ulangi Level / Survival</button>
         <button id="btn-res-home" class="btn ghost">Kembali ke Pilihan Kuis</button>
       </div>
     </section>
