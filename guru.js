@@ -11,13 +11,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnDownloadJson = document.getElementById("btnDownloadJson");
   const btnBackToLogin = document.getElementById("btnBackToLogin");
 
-  // Kalau elemen-elemen penting tidak ditemukan, jangan lakukan apa-apa (hindari error)
   if (!loginCard || !adminPanel || !loginForm) {
     console.warn("Elemen guru.html belum lengkap, guru.js tidak dijalankan penuh.");
     return;
   }
 
-  let bankSoal = null; // objek questions.json yang dimuat di memori
+  let bankSoal = null;
 
   function showAdmin() {
     loginCard.classList.add("hidden");
@@ -31,40 +30,29 @@ document.addEventListener("DOMContentLoaded", () => {
     if (loginForm) loginForm.reset();
   }
 
-  // ---- LOGIN HANDLER ----
   loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const u = (usernameInput?.value || "").trim();
     const p = (passwordInput?.value || "").trim();
-
     if (u === "guru" && p === "admin") {
       showAdmin();
       loadQuestionsFromServer();
     } else {
-      if (loginError) {
-        loginError.textContent = "Username atau password salah. Contoh: guru / admin.";
-      } else {
-        alert("Username atau password salah.");
-      }
+      if (loginError) loginError.textContent = "Username atau password salah. Contoh: guru / admin.";
+      else alert("Username atau password salah.");
     }
   });
 
   if (btnBackToLogin) {
-    btnBackToLogin.addEventListener("click", () => {
-      showLogin();
-    });
+    btnBackToLogin.addEventListener("click", showLogin);
   }
 
-  // ---- LOAD DEFAULT questions.json ----
   async function loadQuestionsFromServer() {
     if (!questionSummary) return;
-
     questionSummary.textContent = "Memuat questions.json dari server...";
     try {
       const res = await fetch("questions.json");
-      if (!res.ok) {
-        throw new Error("Gagal mengambil questions.json (status " + res.status + ")");
-      }
+      if (!res.ok) throw new Error("Gagal mengambil questions.json (status " + res.status + ")");
       const data = await res.json();
       bankSoal = data;
       questionSummary.textContent = makeSummary(bankSoal);
@@ -76,9 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function makeSummary(data) {
-    if (!data || typeof data !== "object") {
-      return "Format data tidak dikenali.";
-    }
+    if (!data || typeof data !== "object") return "Format data tidak dikenali.";
     const lines = [];
     for (const mapel of Object.keys(data)) {
       const levels = data[mapel] || {};
@@ -95,7 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return lines.join("\n");
   }
 
-  // ---- IMPOR JSON BARU DARI FILE ----
   if (jsonInput) {
     jsonInput.addEventListener("change", async (e) => {
       const file = e.target.files?.[0];
@@ -116,7 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ---- DOWNLOAD BANK SOAL YANG SEDANG DIMUAT ----
   if (btnDownloadJson) {
     btnDownloadJson.addEventListener("click", () => {
       if (!bankSoal) {
