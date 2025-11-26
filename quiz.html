@@ -3,29 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Quiz – Quiz Kreativitas</title>
+  <title>Quiz – Quizzer</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 <div class="page">
+
   <header class="site-header">
     <div class="header-left">
       <div class="logo-bubble">Q</div>
       <div>
-        <div><b>Quiz Kreativitas</b></div>
-        <div style="font-size:11px;color:#6b7280;">Mode Siswa – Mengerjakan soal</div>
+        <div><b>Quizzer</b></div>
+        <div style="font-size:11px;color:#6b7280;">Mode Siswa – Mengerjakan Soal</div>
       </div>
     </div>
     <nav class="header-nav">
-      <a href="index.html">Home</a>
+      <a href="index.html">Beranda</a>
       <a href="quiz.html" class="active">Quiz</a>
       <a href="guru.html">Guru</a>
-      <a href="bantuan.html">Bantuan</a>
+      <href="bantuan.html">Bantuan</a>
     </nav>
   </header>
 
   <main class="site-main">
-    <!-- PILIH MAPEL & LEVEL -->
+    <!-- PILIH MAPEL & LEVEL / SURVIVAL -->
     <section class="card" id="home">
       <h2>Pilih Kuis</h2>
       <p class="small" style="margin-top:4px;">
@@ -48,7 +49,7 @@
         </div>
       </div>
 
-      <div class="btn-row" style="margin-top:10px;">
+      <div class="btn-row">
         <button id="btn-start" class="btn primary">Mulai Quiz Biasa</button>
         <button id="btn-random" class="btn ghost">Acak Mapel</button>
       </div>
@@ -58,9 +59,9 @@
       <h3 style="font-size:15px;margin-bottom:6px;">🛡️ Mode Survival</h3>
       <p class="small">
         Jawab <b>50 soal acak</b> dari semua mata pelajaran dan level.
-        Setiap soal punya batas waktu <b>1 menit</b>. Cocok untuk latihan intensif!
+        Setiap soal punya batas waktu <b>1 menit</b>.
       </p>
-      <div class="btn-row" style="margin-top:8px;">
+      <div class="btn-row">
         <button id="btn-survival" class="btn primary">Mulai Mode Survival</button>
       </div>
     </section>
@@ -90,7 +91,7 @@
         <strong id="explainTitle"></strong>
         <div id="explainText" class="small" style="margin-top:4px;"></div>
 
-        <div class="btn-row" style="margin-top:8px;">
+        <div class="btn-row">
           <button id="btn-next" class="btn primary">Soal Berikutnya</button>
           <button id="btn-retry" class="btn danger hidden">Ulangi Level / Survival</button>
           <button id="btn-home" class="btn ghost">Kembali ke Pilihan Kuis</button>
@@ -102,7 +103,7 @@
     <section id="result" class="card hidden">
       <h2>Hasil Quiz</h2>
       <p id="resultText" class="small" style="margin-top:6px;"></p>
-      <div class="btn-row center" style="margin-top:10px;">
+      <div class="btn-row">
         <button id="btn-res-retry" class="btn primary">Ulangi Level / Survival</button>
         <button id="btn-res-home" class="btn ghost">Kembali ke Pilihan Kuis</button>
       </div>
@@ -110,8 +111,9 @@
   </main>
 
   <footer class="site-footer">
-    © 2025 — Quiz Kreativitas • Soal diambil dari <span class="code">questions.json</span>
+    © 2025 — Quizzer • Soal diambil dari <span class="code">questions.json</span>
   </footer>
+
 </div>
 
 <script src="app.js" defer></script>
