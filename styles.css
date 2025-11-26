@@ -244,7 +244,7 @@ input[type="file"] {
   margin-top: 10px;
 }
 
-/* CODE STYLE (untuk text kecil <code>) */
+/* CODE STYLE */
 .code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New",
     monospace;
