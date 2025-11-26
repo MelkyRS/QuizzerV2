@@ -1,39 +1,39 @@
 // app.js – Quiz biasa + Mode Survival (50 soal, 1 menit per soal)
 
 document.addEventListener("DOMContentLoaded", () => {
-  const el = (id) => document.getElementById(id);
+  const $ = (id) => document.getElementById(id);
 
-  // elemen
-  const homeSection = el("home");
-  const quizSection = el("quiz");
-  const resultSection = el("result");
+  // SECTION
+  const homeSection = $("home");
+  const quizSection = $("quiz");
+  const resultSection = $("result");
 
-  const categorySelect = el("category");
-  const levelSelect = el("level");
+  // INPUT & BUTTONS
+  const categorySelect = $("category");
+  const levelSelect = $("level");
+  const btnStart = $("btn-start");
+  const btnRandom = $("btn-random");
+  const btnSurvival = $("btn-survival");
 
-  const btnStart = el("btn-start");
-  const btnRandom = el("btn-random");
-  const btnSurvival = el("btn-survival");
+  const metaEl = $("meta");
+  const scoreEl = $("score");
+  const progressTextEl = $("progressText");
+  const pfill = $("pfill");
+  const questionTextEl = $("questionText");
+  const optionsEl = $("options");
+  const explainBox = $("explain");
+  const explainTitleEl = $("explainTitle");
+  const explainTextEl = $("explainText");
+  const timerEl = $("timer");
 
-  const metaEl = el("meta");
-  const scoreEl = el("score");
-  const progressTextEl = el("progressText");
-  const pfill = el("pfill");
-  const questionTextEl = el("questionText");
-  const optionsEl = el("options");
-  const explainBox = el("explain");
-  const explainTitleEl = el("explainTitle");
-  const explainTextEl = el("explainText");
-  const timerEl = el("timer");
+  const btnNext = $("btn-next");
+  const btnRetry = $("btn-retry");
+  const btnHome = $("btn-home");
+  const btnResRetry = $("btn-res-retry");
+  const btnResHome = $("btn-res-home");
+  const resultTextEl = $("resultText");
 
-  const btnNext = el("btn-next");
-  const btnRetry = el("btn-retry");
-  const btnHome = el("btn-home");
-  const btnResRetry = el("btn-res-retry");
-  const btnResHome = el("btn-res-home");
-  const resultTextEl = el("resultText");
-
-  // state
+  // STATE
   let questionsData = null;
   let currentQuestions = [];
   let currentIndex = 0;
@@ -41,14 +41,14 @@ document.addEventListener("DOMContentLoaded", () => {
   let mode = "normal"; // "normal" | "survival"
   let lastNormalConfig = { category: null, level: null };
 
-  // survival config
+  // SURVIVAL CONFIG
   const SURVIVAL_TOTAL = 50;
-  const TIME_PER_QUESTION = 60; // detik per soal
+  const TIME_PER_QUESTION = 60; // detik
   let timerId = null;
   let timeLeft = 0;
   let questionAnswered = false;
 
-  // util
+  // UTILS
   function shuffle(arr) {
     const a = arr.slice();
     for (let i = a.length - 1; i > 0; i--) {
@@ -67,13 +67,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (which === "result") resultSection.classList.remove("hidden");
   }
 
+  // TIMER
   function startTimer() {
     stopTimer();
     if (!timerEl) return;
-
     timeLeft = TIME_PER_QUESTION;
     timerEl.textContent = `Sisa waktu: ${timeLeft} detik`;
-
     timerId = setInterval(() => {
       timeLeft--;
       if (timeLeft <= 0) {
@@ -94,20 +93,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function handleTimeOut() {
-    if (questionAnswered) return; // sudah dijawab, abaikan
+    if (questionAnswered) return;
     questionAnswered = true;
 
-    // tandai semua opsi sebagai disabled
-    const optionButtons = optionsEl.querySelectorAll(".option");
-    optionButtons.forEach((btn) => {
-      btn.classList.add("disabled");
-      btn.style.cursor = "default";
-    });
-
-    // tampilkan penjelasan "waktu habis"
     const q = currentQuestions[currentIndex];
     const correctIndex = q.answer;
+
+    const optionButtons = optionsEl.querySelectorAll(".option");
     optionButtons.forEach((btn, idx) => {
+      btn.classList.add("disabled");
+      btn.style.cursor = "default";
       if (idx === correctIndex) {
         btn.classList.add("correct");
       }
@@ -120,8 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
       " Coba lebih cepat di soal berikutnya.";
   }
 
-  // ----- LOGIKA QUIZ -----
-
+  // BANGUN SOAL
   function buildNormalQuestions(category, level) {
     const list =
       questionsData &&
@@ -158,6 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return shuffled.slice(0, SURVIVAL_TOTAL);
   }
 
+  // MULAI QUIZ
   function startNormalQuiz(randomCategory = false) {
     if (!questionsData) {
       alert("Bank soal belum siap. Pastikan questions.json bisa diakses.");
@@ -190,6 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     scoreEl.textContent = score;
     metaEl.textContent = `${category} – Level ${level}`;
+    timerEl.textContent = "";
     showSection("quiz");
     renderQuestion();
   }
@@ -215,6 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderQuestion();
   }
 
+  // RENDER SOAL
   function renderQuestion() {
     stopTimer();
     questionAnswered = false;
@@ -242,22 +239,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (mode === "normal") {
       metaEl.textContent = `${q._category} – Level ${q._level}`;
+      timerEl.textContent = "";
     } else {
       metaEl.textContent = `Survival – Soal ${done} / ${total}`;
+      startTimer();
     }
 
     explainBox.classList.add("hidden");
     explainTitleEl.textContent = "";
     explainTextEl.textContent = "";
-
-    // MULAI TIMER (hanya survival yang butuh, tapi boleh juga untuk normal kalau mau)
-    if (mode === "survival") {
-      startTimer();
-    } else {
-      // kalau mau, bisa juga pakai timer di mode normal, tinggal ganti ke startTimer()
-      timerEl.textContent = "";
-      stopTimer();
-    }
   }
 
   function handleOptionClick(e) {
@@ -275,12 +265,8 @@ document.addEventListener("DOMContentLoaded", () => {
     optionButtons.forEach((btn, idx) => {
       btn.classList.add("disabled");
       btn.style.cursor = "default";
-      if (idx === correctIndex) {
-        btn.classList.add("correct");
-      }
-      if (idx === chosenIndex && idx !== correctIndex) {
-        btn.classList.add("wrong");
-      }
+      if (idx === correctIndex) btn.classList.add("correct");
+      if (idx === chosenIndex && idx !== correctIndex) btn.classList.add("wrong");
     });
 
     if (chosenIndex === correctIndex) {
@@ -307,14 +293,12 @@ document.addEventListener("DOMContentLoaded", () => {
     stopTimer();
     const total = currentQuestions.length || 0;
     const percent = total ? Math.round((score / total) * 100) : 0;
-
     if (mode === "survival") {
       resultTextEl.textContent = `Mode Survival selesai! Kamu menjawab benar ${score} dari ${total} soal (${percent}%).`;
     } else {
       const { category, level } = lastNormalConfig;
       resultTextEl.textContent = `Kuis ${category} – Level ${level} selesai. Skor kamu: ${score} dari ${total} soal (${percent}%).`;
     }
-
     showSection("result");
   }
 
@@ -337,8 +321,7 @@ document.addEventListener("DOMContentLoaded", () => {
     showSection("home");
   }
 
-  // ----- EVENT LISTENER -----
-
+  // EVENT
   optionsEl.addEventListener("click", handleOptionClick);
   btnNext.addEventListener("click", goNext);
   btnHome.addEventListener("click", goHome);
@@ -350,8 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
   btnRandom.addEventListener("click", () => startNormalQuiz(true));
   btnSurvival.addEventListener("click", startSurvivalQuiz);
 
-  // ----- LOAD questions.json -----
-
+  // LOAD questions.json
   async function loadQuestions() {
     try {
       const res = await fetch("questions.json");
@@ -359,7 +341,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await res.json();
       questionsData = data;
 
-      // isi dropdown kategori
       const cats = Object.keys(data || {});
       categorySelect.innerHTML = "";
       cats.forEach((cat) => {
@@ -370,9 +351,10 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     } catch (err) {
       console.error(err);
-      alert("Gagal memuat questions.json. Pastikan file itu ada dan path-nya benar.");
+      alert("Gagal memuat questions.json. Pastikan file itu ada dan diakses lewat server (bukan file://).");
     }
   }
 
   loadQuestions();
 });
+
