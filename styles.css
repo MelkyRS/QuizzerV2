@@ -1,13 +1,236 @@
-/* TEST CSS */
+/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* BODY GLOBAL UNTUK HALAMAN BIASA (.page) */
 body {
-  background: pink !important;
+  background: #fdf2ff;
+  color: #0f172a;
 }
 
 .page {
-  border: 5px solid red;
+  max-width: 1000px;
+  margin: auto;
+  padding: 14px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
+/* HEADER */
 .site-header {
-  background: black;
+  background: white;
+  padding: 12px 14px;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.08);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-bubble {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: #fb7185;
   color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.header-nav a {
+  text-decoration: none;
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #0f172a;
+}
+
+.header-nav a.active {
+  background: #0f172a;
+  color: white;
+}
+
+/* MAIN */
+.site-main {
+  flex: 1;
+}
+
+.hero {
+  background: white;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.08);
+  margin-bottom: 14px;
+}
+
+.hero h1 { font-size: 20px; }
+
+.card {
+  background: white;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.08);
+  margin-bottom: 14px;
+}
+
+.grid-2 {
+  display: grid;
+  gap: 10px;
+}
+
+@media(min-width:700px){
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+}
+
+label { font-size: 12px; font-weight: bold; }
+
+select, input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+}
+
+.btn {
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.btn.primary {
+  background: #fb7185;
+  color: white;
+}
+
+.btn.ghost {
+  background: white;
+  border: 1px solid #e5e7eb;
+}
+
+/* QUIZ */
+.question {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.options {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.option {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  cursor: pointer;
+}
+
+.progress {
+  background: #e5e7eb;
+  height: 8px;
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.progress-fill {
+  background: #fb7185;
+  height: 100%;
+  width: 0%;
+}
+
+/* FOOTER */
+.site-footer {
+  font-size: 11px;
+  color: #6b7280;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* KECIL & LAYOUT BANTUAN */
+.small {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* ====== UPDATE UNTUK MODE SURVIVAL & QUIZ ====== */
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.quiz-meta {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.quiz-score {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.timer {
+  margin-top: 2px;
+  font-weight: 700;
+  color: #b91c1c;
+}
+
+.explain {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+}
+
+/* UTILITY */
+.hidden {
+  display: none;
+}
+
+.code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New",
+    monospace;
+  font-size: 12px;
+  padding: 2px 5px;
+  border-radius: 6px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
 }
